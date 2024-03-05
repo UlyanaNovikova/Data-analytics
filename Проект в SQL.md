@@ -88,7 +88,7 @@ Technology     |             0.16|
 ```
 SELECT o.order_id, r.returned
 FROM orders o
-LEFT JOIN returns r ON o.Order_ID = r.Order_ID
+INNER JOIN returns r ON o.Order_ID = r.Order_ID
 WHERE r.returned='Yes'
 LIMIT 5;
 
