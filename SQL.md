@@ -1,6 +1,9 @@
+В этом проекте рассмотрены данные о продажах магазина, включающие расходы и сегментацию покупателей, продажи по регионам, показатели рентабельности и др.
+
+Берем данные из таблиц [orders.csv](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/orders.csv), [returns.csv](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/returns.csv). 
 
 
-### Table of Contents
+### Содержание
 - [Базовый анализ данных](#базовый-анализ-данных)
 - [Группировка данных](#группировка-данных)
 - [Join](#join)
@@ -76,6 +79,7 @@ Furniture      |             0.04|
 Office Supplies|             0.14|
 Technology     |             0.16|
 ```
+
 
 ### Join
 Объединим таблицу "Orders" с таблицей "Returns", чтобы найти возвращенные заказы
@@ -296,7 +300,3 @@ CA-2017-116638|FUR-TA-10000198|Furniture|4297.6440|         1|
 US-2017-126977|FUR-BO-10004834|Furniture|4228.7040|         1|
 CA-2016-128209|FUR-BO-10002213|Furniture|4007.8400|         1|
 ```
-
-
-
-
