@@ -973,4 +973,4 @@ print('Lasso Regression Test RMSE: {}'.format(lasso_test_rmse))
     Lasso Regression Test RMSE: 0.7931257597976528
 
 
-Ridge Regression model with appha=0,01 has the better quality than Lasso Regression. 
+Ridge Regression model with alpha=0,01 has the better quality than Lasso Regression. 
