@@ -2,7 +2,7 @@
 
 This project aims at predicting cab trip durations using machine learning on cab trip data in New York City. We explore temporal patterns, apply Ridge and Lasso regression models, Decision Tree and Random Forest models.
 
-We will be working with data from the [New York City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration/overview) competition, which was about predicting the duration of a taxi trip.
+We will be working with data from the [New York City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration/overview) competition.
 
 ### Table of contents
 
