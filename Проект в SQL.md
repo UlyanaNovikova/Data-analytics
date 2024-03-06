@@ -2,7 +2,7 @@
 
 В этом проекте рассмотрены данные о продажах магазина, включающие расходы и сегментацию покупателей, продажи по регионам, показатели рентабельности и др. Анализируем данные в PostgreSQL.
 
-Берем данные из таблиц [orders.csv](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/orders.csv), [returns.csv](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/returns.csv). 
+Используем данные [orders.csv](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/orders.csv), [returns.csv](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/returns.csv). 
 
 
 ### Содержание
