@@ -1,14 +1,15 @@
 # NYC Taxi Trip Duration Prediction: Ridge vs Lasso Regression
 
-This project aims at predicting cab trip durations using machine learning on cab trip data in New York City. We explore temporal patterns, apply Ridge and Lasso regression models with different preprocessing strategies and perform grid search to optimize their hyperparameters.
+This project aims at predicting cab trip durations using machine learning on cab trip data in New York City. We explore temporal patterns, apply Ridge and Lasso regression models, Decision Tree and Random Forest models.
 
 We will be working with data from the [New York City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration/overview) competition, which was about predicting the duration of a taxi trip.
 
 ### Table of contents
 
 1. [Descriptive statistics](#descriptive-statistics)
-2. [Predicting the target variable](#predicting-the-target-variable)
-3. [Grid search for Ridge and Lasso](#grid-search-for-ridge-and-lasso)
+2. [Ridge and Lasso models](#ridge-and-lasso-models)
+3. [Decision tree](#decision-tree)
+4. [Random forest](#random-forest)
 
 
 ### Descriptive statistics
@@ -27,6 +28,8 @@ from warnings import filterwarnings
 from sklearn.preprocessing import OrdinalEncoder, MinMaxScaler
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 filterwarnings('ignore')
 %matplotlib inline
@@ -699,7 +702,7 @@ _ = plt.xticks(np.arange(0, 181, 6), np.unique(train_data.pickup_datetime.dt.dat
 
 2. The logarithmic transformation in the plot of log_trip_duration mitigates the visibility of anomalies observed in the original trip count graphs, such as the lowest activity on specific dates ('2016-01-23', '2016-01-24', '2016-05-30'). This is because the transformation compresses extreme values, making them less apparent in the transformed scale. The absence of these anomalies in the log-transformed graph underscores the impact of the chosen transformation on highlighting broader temporal trends rather than specific anomalous dates.
 
-### Predicting the target variable
+### Ridge and Lasso models
 
 Let's train `Ridge` regression with default parameters by encoding all categorical features with `OneHotEncoder`. We scale numerical features with `StandardScaler`. 
 
@@ -920,7 +923,7 @@ fit_pipeline(lasso_pipeline_new, *train_test_split(train, random_state=42, test_
 
 The lower RMSE values for Ridge Regression suggest that it has better predictive performance compared to Lasso Regression. It can be because Ridge Regression's L2 regularization prevents overfitting by penalizing large coefficients, while Lasso Regression's L1 regularization induces sparsity, making it less flexible. One-Hot Encoding ans standart scaling turned out to be the best options with the lowest Test RMSE, suggesting that it effectively captured the categorical information. The other encoding options, might have shown worse quality due to assumptions about ordinal relationships or sensitivity to outliers in scaling.
 
-### Grid search for Ridge and Lasso
+Grid search for Ridge and Lasso
 
 Let's find the optimal values of the regularization parameter for `Ridge` and `Lasso`
 
@@ -974,3 +977,58 @@ print('Lasso Regression Test RMSE: {}'.format(lasso_test_rmse))
 
 
 Ridge Regression model with alpha=0,01 has the better quality than Lasso Regression. 
+
+### Decision tree
+
+Let's preprocess the data
+
+
+```python
+encoder = OneHotEncoder(handle_unknown='ignore', sparse=False)
+X_train_encoded = encoder.fit_transform(X_train[categorical_columns])
+X_val_encoded = encoder.transform(X_val[categorical_columns])
+X_test_encoded = encoder.transform(X_test[categorical_columns])
+
+X_train_processed = np.hstack((X_train_encoded, X_train[numeric_columns]))
+X_val_processed = np.hstack((X_val_encoded, X_val[numeric_columns]))
+X_test_processed = np.hstack((X_test_encoded, X_test[numeric_columns]))
+```
+
+Create decision tree model
+
+
+```python
+tree_model = DecisionTreeRegressor(random_state=42)
+tree_model.fit(X_train_processed, y_train)
+
+y_pred = tree_model.predict(X_test_processed)
+```
+
+Calculate RMSE
+
+
+```python
+test_rmse = RMSE(y_test, y_pred)
+print("Test RMSE:", test_rmse)
+```
+
+    Test RMSE: 0.6093510815827965
+
+
+RMSE for the Decision Tree is lower than for Ridge and Lasso models
+
+### Random forest 
+
+
+```python
+forest_model = RandomForestRegressor(random_state=42)
+forest_model.fit(X_train_processed, y_train)
+y_pred_forest = forest_model.predict(X_test_processed)
+test_rmse_forest = RMSE(y_test, y_pred_forest)
+print("Random Forest Test RMSE:", test_rmse_forest)
+```
+
+    Random Forest Test RMSE: 0.4157463493510933
+
+
+RMSE for the Random Forest Tree is lower than for the Decision Tree
