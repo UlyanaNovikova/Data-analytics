@@ -4,6 +4,14 @@ This project aims at predicting cab trip durations using machine learning on cab
 
 We will be working with data from the [New York City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration/overview) competition, which was about predicting the duration of a taxi trip.
 
+### Table of contents
+
+1. [Descriptive statistics](#descriptive-statistics)
+2. [Predicting the target variable](#predicting-the-target-variable)
+3. [Grid search for Ridge and Lasso](#grid-search-for-ridge-and-lasso)
+
+
+### Descriptive statistics
 
 ```python
 import pandas as pd
@@ -24,35 +32,15 @@ filterwarnings('ignore')
 %matplotlib inline
 ```
 
-### Descriptive statistics
-
-
+Let's import the data
 ```python
 train = pd.read_csv('train.csv')
 ```
-
 
 ```python
 train.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -180,8 +168,8 @@ _ = ax[1].set_ylabel('Frequency', dict(size=13))
 ```
 
 
-    
-![png](output_11_0.png)
+![Python Image](https://github.com/UlyanaNovikova/Data-analytics/raw/main/Files/images%20python%201/output_11_0.png)
+
     
 
 
@@ -204,8 +192,8 @@ _ = sns.histplot(data=train, x=target, bins=100)
 ```
 
 
-    
-![png](output_14_0.png)
+ ![Python Image](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_14_0.png)   
+
     
 
 
@@ -244,7 +232,7 @@ _ = plt.xticks(np.arange(0, 181, 6), np.unique(train.pickup_datetime.dt.date)[::
 
 
     
-![png](output_19_0.png)
+ ![Python Image](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_19_0.png)   
     
 
 
@@ -260,11 +248,6 @@ min_two_dates
 ```
 
     Dates with the fewest trips:
-
-
-
-
-
     PeriodIndex(['2016-01-23', '2016-01-24', '2016-05-30'], dtype='period[D]')
 
 
@@ -286,23 +269,6 @@ train['month_name'] = train.pickup_datetime.dt.month_name()
 train.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -433,7 +399,7 @@ _ = plt.title('Number of trips distribution by time of day', dict(size=14))
 
 
     
-![png](output_26_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_26_0.png)
     
 
 
@@ -461,7 +427,7 @@ _ = plt.title('Number of trips distribution by day of week', dict(size=14))
 
 
     
-![png](output_27_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_27_0.png)
     
 
 
@@ -487,7 +453,7 @@ _ = plt.title('Distribution of the number of trips by hour of the day and month'
 
 
     
-![png](output_29_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_29_0.png)
     
 
 
@@ -517,7 +483,7 @@ _ = plt.title('Distribution of the number of trips by hour of the day and day of
 
 
     
-![png](output_30_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_30_0.png)
     
 
 
@@ -540,22 +506,6 @@ train.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -706,7 +656,7 @@ plt.show()
 
 
     
-![png](output_36_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_36_0.png)
     
 
 
@@ -724,7 +674,7 @@ plt.show()
 
 
     
-![png](output_37_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_37_0.png)
     
 
 
@@ -741,7 +691,7 @@ _ = plt.xticks(np.arange(0, 181, 6), np.unique(train_data.pickup_datetime.dt.dat
 
 
     
-![png](output_38_0.png)
+![png](https://github.com/UlyanaNovikova/Data-analytics/blob/main/Files/images%20python%201/output_38_0.png)
     
 
 
@@ -786,22 +736,6 @@ train_data.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -986,7 +920,7 @@ fit_pipeline(lasso_pipeline_new, *train_test_split(train, random_state=42, test_
 
 The lower RMSE values for Ridge Regression suggest that it has better predictive performance compared to Lasso Regression. It can be because Ridge Regression's L2 regularization prevents overfitting by penalizing large coefficients, while Lasso Regression's L1 regularization induces sparsity, making it less flexible. One-Hot Encoding ans standart scaling turned out to be the best options with the lowest Test RMSE, suggesting that it effectively captured the categorical information. The other encoding options, might have shown worse quality due to assumptions about ordinal relationships or sensitivity to outliers in scaling.
 
-### Grid search for `Ridge` and `Lasso`
+### Grid search for Ridge and Lasso
 
 Let's find the optimal values of the regularization parameter for `Ridge` and `Lasso`
 
