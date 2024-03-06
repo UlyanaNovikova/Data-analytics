@@ -1,4 +1,4 @@
-# NYC Taxi Trip Duration Prediction: Ridge vs Lasso Regression
+# NYC Taxi Trip Duration Prediction
 
 This project aims at predicting cab trip durations using machine learning on cab trip data in New York City. We explore temporal patterns, apply Ridge and Lasso regression models, Decision Tree and Random Forest models.
 
